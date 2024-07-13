@@ -1,11 +1,21 @@
 package edu.bdeb.a10.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "AutoriteFiscale")
 public class AutoriteFiscale {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Columnz(name=name)
     private String nom;
+    @Column(name = seuil_exonere)
     private double seuilExonere;
     private List<TranchesRevenu> taux;
 

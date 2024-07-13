@@ -1,10 +1,22 @@
 package edu.bdeb.a10.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="TranchesRevenu")
 public class TranchesRevenu {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = autorite_fiscale_id)
     private int autoriteFiscaleId;
+    @Column(name=tranche_min)
     private double trancheMin;
+    @Column(name=tranche_max)
     private double trancheMax;
+    @Column(name=taux_imposition)
     private double tauxImposition;
 
     // Constructeurs

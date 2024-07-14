@@ -23,7 +23,7 @@ public class DB_Connector {
     private DB_Connector() {
         loadDBProperties();
         try {
-            System.out.println("ConnectionString = "+this.DB_URL);
+
             this.connection = DriverManager.getConnection(this.DB_URL, this.DB_USER, this.DB_PASSWORD);
         } catch (SQLException e) {
             throw new RuntimeException(e);

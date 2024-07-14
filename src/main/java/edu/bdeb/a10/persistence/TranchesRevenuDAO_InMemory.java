@@ -5,23 +5,33 @@ import edu.bdeb.a10.model.TranchesRevenu;
 import java.util.List;
 
 public class TranchesRevenuDAO_InMemory implements ITranchesRevenuDAO{
-    @Override
-    public List<TranchesRevenu> rechercheTaux(String autorite, double montant) {
-        return List.of();
-    }
 
+@Override
+    // Recherche les tranches de revenu pour une autorité fiscale donnée et un montant donné.
+public List<TranchesRevenu> rechercheTaux(String autorite, double montant){
+    return List.of();
+}
+
+    // Ajoute une nouvelle tranche de revenu dans la base de données.
     @Override
-    public int ajouterTranchesRevenu(TranchesRevenu tranche) {
+    public int ajouterTranchesRevenu(TranchesRevenu tranche){
         return 0;
     }
 
+    //Modifie une tranche de revenu existante dans la base de données.
     @Override
-    public int modifierTranchesRevenu(TranchesRevenu tranche) {
+    public int modifierTranchesRevenu(TranchesRevenu tranche){
         return 0;
     }
 
+    // Supprime toutes les tranches de revenu pour une autorité fiscale donnée.
+
     @Override
-    public int supprimerTranchesRevenuAutorite(String autorite) {
+    public int supprimerTranchesRevenuAutorite(String autorite){
         return 0;
     }
+
+
+
+
 }

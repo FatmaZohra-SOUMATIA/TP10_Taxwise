@@ -41,14 +41,14 @@ public class TranchesRevenuDAO_JDBC implements ITranchesRevenuDAO {
     }
 
     @Override
-    public int ajouterTranchesRevenu(TranchesRevenu tranche) {
+    public void ajouterTranchesRevenu(TranchesRevenu tranche) {
         PreparedStatement pst = null;
         try {
             pst = this.connexion.prepareStatement(QueryBox.AJOUTER_TRANCHE_REVENU);
             pst.setDouble(1,tranche.getTrancheMin());
             pst.setDouble(2,tranche.getTrancheMax());
             pst.setDouble(3,tranche.getTauxImposition());
-            return pst.executeUpdate();
+            pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

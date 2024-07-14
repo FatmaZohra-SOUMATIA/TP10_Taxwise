@@ -20,8 +20,8 @@ public class AutoriteFiscaleDAO_InMemory implements IAutoriteFiscaleDAO {
     }
 
     @Override
-    public int ajouterAutorite(String autorite, double seuil) {
-        return 0;
+    public void ajouterAutorite(AutoriteFiscale autoriteFiscale) {
+
     }
 
     @Override

@@ -1,6 +1,8 @@
 package edu.bdeb.a10.persistence;
 
 import edu.bdeb.a10.dataStore.DB_Connector;
+import edu.bdeb.a10.model.AutoriteFiscale;
+import jakarta.persistence.EntityTransaction;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,8 +33,8 @@ public class AutoriteFiscaleDAO_JDBC implements IAutoriteFiscaleDAO {
     }
 
     @Override
-    public int ajouterAutorite(String autorite, double seuil) {
-        return 0;
+    public void ajouterAutorite(AutoriteFiscale autoriteFiscale) {
+
     }
 
     @Override

@@ -13,7 +13,7 @@ public interface ITranchesRevenuDAO {
     List<TranchesRevenu> rechercheTaux(String autorite, double montant);
 
     // Ajoute une nouvelle tranche de revenu dans la base de données.
-    int ajouterTranchesRevenu(TranchesRevenu tranche);
+    void ajouterTranchesRevenu(TranchesRevenu tranche);
 
     //Modifie une tranche de revenu existante dans la base de données.
     int modifierTranchesRevenu(TranchesRevenu tranche);

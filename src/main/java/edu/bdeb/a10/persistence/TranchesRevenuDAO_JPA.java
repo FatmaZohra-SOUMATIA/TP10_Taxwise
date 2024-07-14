@@ -3,8 +3,8 @@ package edu.bdeb.a10.persistence;
 import edu.bdeb.a10.model.TranchesRevenu;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
 import org.hibernate.jpa.HibernatePersistenceProvider;
-
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,8 +29,18 @@ public class TranchesRevenuDAO_JPA implements ITranchesRevenuDAO {
     }
 
     @Override
-    public int ajouterTranchesRevenu(TranchesRevenu tranche) {
-        return 0;
+    public void ajouterTranchesRevenu(TranchesRevenu tranche) {
+        EntityTransaction transaction = this.em.getTransaction();
+        try {
+            transaction.begin();
+            this.em.persist(tranche);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace(); // Handle or log the exception as needed
+        }
     }
 
     @Override
@@ -43,3 +53,5 @@ public class TranchesRevenuDAO_JPA implements ITranchesRevenuDAO {
         return 0;
     }
 }
+
+

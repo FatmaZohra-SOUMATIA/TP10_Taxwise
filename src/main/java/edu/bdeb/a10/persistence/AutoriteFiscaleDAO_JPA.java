@@ -3,6 +3,7 @@ package edu.bdeb.a10.persistence;
 import edu.bdeb.a10.model.AutoriteFiscale;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
 import java.util.HashMap;
@@ -30,8 +31,18 @@ public class AutoriteFiscaleDAO_JPA implements IAutoriteFiscaleDAO {
     }
 
     @Override
-    public int ajouterAutorite(String autorite, double seuil) {
-        return 0;
+    public void ajouterAutorite(AutoriteFiscale autoriteFiscale) {
+        EntityTransaction transaction = this.em.getTransaction();
+        try {
+            transaction.begin();
+            this.em.persist(autoriteFiscale);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace(); // Handle or log the exception as needed
+        }
     }
 
     @Override

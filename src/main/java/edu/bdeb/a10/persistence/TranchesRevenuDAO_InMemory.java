@@ -14,8 +14,8 @@ public List<TranchesRevenu> rechercheTaux(String autorite, double montant){
 
     // Ajoute une nouvelle tranche de revenu dans la base de données.
     @Override
-    public int ajouterTranchesRevenu(TranchesRevenu tranche){
-        return 0;
+    public void ajouterTranchesRevenu(TranchesRevenu tranche){
+
     }
 
     //Modifie une tranche de revenu existante dans la base de données.

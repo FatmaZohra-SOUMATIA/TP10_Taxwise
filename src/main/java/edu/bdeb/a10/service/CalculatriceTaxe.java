@@ -19,25 +19,15 @@ public class CalculatriceTaxe {
     protected ITranchesRevenuDAO daoTaux;
     protected IAutoriteFiscaleDAO daoSeuil;
 
-    /**
-     * Constructeur de la classe CalculatriceTaxe.
-     *
-     * @param daoTaux  DAO pour accéder aux données des tranches de revenu.
-     * @param daoSeuil DAO pour accéder aux données des seuils fiscaux.
-     */
+   // Constructeur de la classe CalculatriceTaxe.
+
     public CalculatriceTaxe(ITranchesRevenuDAO daoTaux, IAutoriteFiscaleDAO daoSeuil) {
         this.daoTaux = daoTaux;
         this.daoSeuil = daoSeuil;
     }
 
-    /**
-     * Calcule la taxe pour un montant donné en utilisant les informations spécifiques
-     * à une autorité fiscale.
-     *
-     * @param montant  Le montant sur lequel la taxe doit être calculée.
-     * @param autorite Le nom de l'autorité fiscale.
-     * @return Le montant de la taxe calculée.
-     */
+    // Calcule la taxe pour un montant donné en utilisant les informations spécifiques
+
     public double calculTaxe(double montant, String autorite) {
         double taxe = 0;
         // Récupère le seuil pour l'autorité fiscale donnée
@@ -53,20 +43,21 @@ public class CalculatriceTaxe {
             for (TranchesRevenu tr : listeTranches) {
                 // Si le montant est supérieur à la tranche maximale
                 if (montant > tr.getTrancheMax()) {
-                    // Calcule la taxe pour cette tranche
-                    taxe += (tr.getTrancheMax() - tr.getTrancheMin()) * (tr.getTauxImposition() / 100);
-                    System.out.println(" dans IF max = " + tr.getTrancheMax() + " Min = " + tr.getTrancheMin() + " taux = " + tr.getTauxImposition());
-                } else {
                     // Si la tranche minimale est zéro, applique une logique différente
-                    if (tr.getTrancheMin() == 0) {
+                    if (tr.getTrancheMin() == 0){
                         // Calcule la taxe pour le montant au-dessus du seuil
-                        taxe += (montant - seuil) * (tr.getTauxImposition() / 100);
-
-                    } else {
+                        taxe += (tr.getTrancheMax() - seuil) * (tr.getTauxImposition() / 100);
+                        System.out.println(" dans IF max = " + tr.getTrancheMax() + " Min = " + tr.getTrancheMin() + " taux = " + tr.getTauxImposition() +" tax = " + taxe);
+                    }else{
+                        // Calcule la taxe pour cette tranche
+                        taxe += (tr.getTrancheMax() - tr.getTrancheMin()) * (tr.getTauxImposition() / 100);
+                        System.out.println(" dans IF max = " + tr.getTrancheMax() + " Min = " + tr.getTrancheMin() + " taux = " + tr.getTauxImposition()+" tax = " + taxe);
+                    }
+                } else {
                         // Calcule la taxe pour la partie du montant dans cette tranche
                         taxe += (montant - tr.getTrancheMin()) * (tr.getTauxImposition() / 100);
-                        System.out.println(" dans ELSE max = " + tr.getTrancheMax() + " Min = " + tr.getTrancheMin());
-                    }
+                        System.out.println(" dans ELSE max = " + tr.getTrancheMax() + " Min = " + tr.getTrancheMin() +" tax = " + taxe);
+
                 }
             }
         }

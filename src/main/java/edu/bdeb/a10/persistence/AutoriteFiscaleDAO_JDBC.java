@@ -29,4 +29,19 @@ public class AutoriteFiscaleDAO_JDBC implements IAutoriteFiscaleDAO {
 
        return 0;
     }
+
+    @Override
+    public int ajouterAutorite(String autorite, double seuil) {
+        return 0;
+    }
+
+    @Override
+    public int modifierSeuilAutorite(String autorite, double seuil) {
+        return 0;
+    }
+
+    @Override
+    public int supprimerAutorite(String autorite) {
+        return 0;
+    }
 }

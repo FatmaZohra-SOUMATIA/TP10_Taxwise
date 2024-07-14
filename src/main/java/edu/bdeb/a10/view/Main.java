@@ -4,8 +4,8 @@ package edu.bdeb.a10.view;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Calcul des impots");
-        TaxwiseVue.calculatriceVue();
+        System.out.println("Calcul des impôts");
+        TaxwiseVue.calculTaxeVue();
         System.out.println("all-ok!");
     }
 }

@@ -6,4 +6,19 @@ public class AutoriteFiscaleDAO_InMemory implements IAutoriteFiscaleDAO {
     public double rechercheSeuil(String autorite) {
         return 0;
     }
+
+    @Override
+    public int ajouterAutorite(String autorite, double seuil) {
+        return 0;
+    }
+
+    @Override
+    public int modifierSeuilAutorite(String autorite, double seuil) {
+        return 0;
+    }
+
+    @Override
+    public int supprimerAutorite(String autorite) {
+        return 0;
+    }
 }

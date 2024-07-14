@@ -1,14 +1,17 @@
+
 CREATE TABLE AutoriteFiscale (
-                                 id INT AUTO_INCREMENT PRIMARY KEY,
-                                 nom VARCHAR(100) NOT NULL,
-                                 seuil_exonere DECIMAL(10, 2) NOT NULL
+                                 id INT PRIMARY KEY AUTO_INCREMENT,
+                                 nom VARCHAR(255) NOT NULL,
+                                 seuil_exonere DOUBLE
 );
 
+
+
 CREATE TABLE TranchesRevenu (
-                                id INT AUTO_INCREMENT PRIMARY KEY,
+                                id INT PRIMARY KEY AUTO_INCREMENT,
+                                tranche_min DOUBLE,
+                                tranche_max DOUBLE,
+                                taux_imposition DOUBLE,
                                 autorite_fiscale_id INT,
-                                tranche_min DECIMAL(10, 2),
-                                tranche_max DECIMAL(10, 2),
-                                taux_imposition DECIMAL(5, 2),
-                                FOREIGN KEY (autorite_fiscale_id) REFERENCES AutoriteFiscale(id)
+                                FOREIGN KEY (autorite_fiscale_id) REFERENCES AutoriteFiscale(id) ON DELETE CASCADE
 );

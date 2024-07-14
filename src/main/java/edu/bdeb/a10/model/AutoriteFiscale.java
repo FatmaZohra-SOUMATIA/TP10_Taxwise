@@ -1,12 +1,26 @@
 package edu.bdeb.a10.model;
 
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "AutoriteFiscale")
 public class AutoriteFiscale {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "nom")
     private String nom;
+
+    @Column(name = "seuil_exonere")
     private double seuilExonere;
+
+    @OneToMany
+    @JoinColumn(name = "autorite_fiscale_id")
     private List<TranchesRevenu> taux;
 
     // Constructeurs
@@ -16,11 +30,15 @@ public class AutoriteFiscale {
         this.seuilExonere = seuilExonere;
         this.taux = new ArrayList<TranchesRevenu>();
     }
-
+    public AutoriteFiscale(String nom, double seuilExonere) {
+                this.nom = nom;
+        this.seuilExonere = seuilExonere;
+        this.taux = new ArrayList<TranchesRevenu>();
+    }
     public AutoriteFiscale() {
     }
-    // Getters and Setters
 
+    // Getters and Setters
     public int getId() {
         return id;
     }

@@ -27,11 +27,10 @@ public class TranchesRevenuDAO_JDBC implements ITranchesRevenuDAO {
             ResultSet result = pst.executeQuery(); //le resultat est un enregistrement
             while (result.next()) {  //s il y a au moins un enregistrement dans l objet result
                 int id=result.getInt("id");
-                int autoriteFiscaleId=result.getInt("autorite_fiscale_id");
                 double trancheMin=result.getDouble("tranche_min");
                 double trancheMax=result.getDouble("tranche_max");
                 double tauxImposition=result.getDouble("taux_imposition");
-                tranchesRevenu.add(new TranchesRevenu( id, autoriteFiscaleId, trancheMin, trancheMax,  tauxImposition));
+                tranchesRevenu.add(new TranchesRevenu( id, trancheMin, trancheMax,  tauxImposition));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -46,8 +45,7 @@ public class TranchesRevenuDAO_JDBC implements ITranchesRevenuDAO {
         PreparedStatement pst = null;
         try {
             pst = this.connexion.prepareStatement(QueryBox.AJOUTER_TRANCHE_REVENU);
-            pst.setInt(1, tranche.setAutoriteFiscaleId());
-            pst.setDouble(2,tranche.getTrancheMin());
+            pst.setDouble(1,tranche.getTrancheMin());
             pst.setDouble(2,tranche.getTrancheMax());
             pst.setDouble(3,tranche.getTauxImposition());
             return pst.executeUpdate();
@@ -55,7 +53,6 @@ public class TranchesRevenuDAO_JDBC implements ITranchesRevenuDAO {
             throw new RuntimeException(e);
         }
 
-        return 0;
     }
 
     @Override

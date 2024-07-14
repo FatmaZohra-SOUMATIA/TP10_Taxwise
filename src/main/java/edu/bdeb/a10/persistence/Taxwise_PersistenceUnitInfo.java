@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class Taxwise_PersistenceUnitinfo implements PersistenceUnitInfo {
+public class Taxwise_PersistenceUnitInfo implements PersistenceUnitInfo {
 
     @Override
     public String getPersistenceUnitName() {

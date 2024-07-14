@@ -1,22 +1,18 @@
 package edu.bdeb.a10.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name="TranchesRevenu")
+
 public class TranchesRevenu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = autorite_fiscale_id)
-    private int autoriteFiscaleId;
-    @Column(name=tranche_min)
+    @Column(name="tranche_min")
     private double trancheMin;
-    @Column(name=tranche_max)
+    @Column(name="tranche_max")
     private double trancheMax;
-    @Column(name=taux_imposition)
+    @Column(name="taux_imposition")
     private double tauxImposition;
 
     // Constructeurs
@@ -24,9 +20,9 @@ public class TranchesRevenu {
     public TranchesRevenu() {
     }
 
-    public TranchesRevenu(int id, int autoriteFiscaleId, double trancheMin, double trancheMax, double tauxImposition) {
+    public TranchesRevenu(int id,  double trancheMin, double trancheMax, double tauxImposition) {
         this.id = id;
-        this.autoriteFiscaleId = autoriteFiscaleId;
+
         this.trancheMin = trancheMin;
         this.trancheMax = trancheMax;
         this.tauxImposition = tauxImposition;
@@ -40,14 +36,6 @@ public class TranchesRevenu {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getAutoriteFiscaleId() {
-        return autoriteFiscaleId;
-    }
-
-    public void setAutoriteFiscaleId(int autoriteFiscaleId) {
-        this.autoriteFiscaleId = autoriteFiscaleId;
     }
 
     public double getTrancheMin() {

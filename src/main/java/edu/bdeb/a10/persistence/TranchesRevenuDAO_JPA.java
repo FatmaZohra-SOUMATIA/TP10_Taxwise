@@ -52,6 +52,7 @@ public class TranchesRevenuDAO_JPA implements ITranchesRevenuDAO {
             tr.setTrancheMax((double) result[2]);
             tr.setTauxImposition((double) result[3]);
 
+
             listeTranches.add(tr);
         }
 

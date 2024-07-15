@@ -38,12 +38,12 @@ public class AutoriteFiscaleDAO_JDBC implements IAutoriteFiscaleDAO {
     }
 
     @Override
-    public int modifierSeuilAutorite(String autorite, double seuil) {
-        return 0;
+    public void modifierSeuilAutorite(int id, double seuil) {
+
     }
 
     @Override
-    public int supprimerAutorite(String autorite) {
-        return 0;
+    public void supprimerAutorite(int id) {
+
     }
 }

@@ -26,14 +26,13 @@ public class CalculatriceTaxe {
         this.daoSeuil = daoSeuil;
     }
 
-    // Calcule la taxe pour un montant donné en utilisant les informations spécifiques
+    // Calcule la taxe pour un montant donné selon l autorite
 
     public double calculTaxe(double montant, String autorite) {
         double taxe = 0;
         // Récupère le seuil pour l'autorité fiscale donnée
         double seuil = daoSeuil.rechercheSeuil(autorite);
-        System.out.println(seuil);
-        System.out.println(autorite);
+
         // Récupère la liste des tranches de revenu pour l'autorité fiscale et le montant donné
         List<TranchesRevenu> listeTranches = daoTaux.rechercheTaux(autorite, montant);
 
@@ -47,17 +46,19 @@ public class CalculatriceTaxe {
                     if (tr.getTrancheMin() == 0){
                         // Calcule la taxe pour le montant au-dessus du seuil
                         taxe += (tr.getTrancheMax() - seuil) * (tr.getTauxImposition() / 100);
-                        System.out.println(" dans IF max = " + tr.getTrancheMax() + " Min = " + tr.getTrancheMin() + " taux = " + tr.getTauxImposition() +" tax = " + taxe);
                     }else{
                         // Calcule la taxe pour cette tranche
                         taxe += (tr.getTrancheMax() - tr.getTrancheMin()) * (tr.getTauxImposition() / 100);
-                        System.out.println(" dans IF max = " + tr.getTrancheMax() + " Min = " + tr.getTrancheMin() + " taux = " + tr.getTauxImposition()+" tax = " + taxe);
                     }
                 } else {
+                    if (tr.getTrancheMin() == 0){
+                        // Calcule la taxe pour le montant au-dessus du seuil
+                        taxe += (montant - seuil) * (tr.getTauxImposition() / 100);
+                    }else {
                         // Calcule la taxe pour la partie du montant dans cette tranche
                         taxe += (montant - tr.getTrancheMin()) * (tr.getTauxImposition() / 100);
-                        System.out.println(" dans ELSE max = " + tr.getTrancheMax() + " Min = " + tr.getTrancheMin() +" tax = " + taxe);
 
+                    }
                 }
             }
         }

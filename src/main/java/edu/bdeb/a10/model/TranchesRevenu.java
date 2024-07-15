@@ -3,15 +3,12 @@ package edu.bdeb.a10.model;
 import jakarta.persistence.*;
 
 @Entity
-@NamedQuery(name = "TROUVER_TRANCHE_REVENU_PAR_NOM_AUTORITE ", query =
+@NamedQuery(name = "TROUVER_TRANCHE_REVENU_PAR_NOM_AUTORITE", query =
 
-        "SELECT tr.id, tr.trancheMin, tr.trancheMax, tr.tauxImposition " +
+        "SELECT tr " +
                 "FROM TranchesRevenu tr " +
                 "JOIN AutoriteFiscale af ON tr.id = af.id " +
-                "WHERE af.nom LIKE :nom AND tr.trancheMin <= :min")
-
-@NamedQuery(name = "AJOUTER_TRANCHE_REVENU ", query = "INSERT INTO TranchesRevenu (trancheMin, trancheMax, tauxImposition) " +
-        "VALUES (:trancheMin, :trancheMax, :tauxImposition)")
+                "WHERE af.nom LIKE :nom AND tr.trancheMin <= :revenu")
 
 public class TranchesRevenu {
     @Id

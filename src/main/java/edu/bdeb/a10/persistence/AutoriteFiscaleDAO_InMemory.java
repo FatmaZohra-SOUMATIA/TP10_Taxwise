@@ -11,27 +11,34 @@ public class AutoriteFiscaleDAO_InMemory implements IAutoriteFiscaleDAO {
     @Override
 
     public double rechercheSeuil(String autorite) {
-        for(AutoriteFiscale af : this.db.sueilAutorite){
+        for(AutoriteFiscale af : this.db.autoritesFiscale){
             if (af.getNom().equals(autorite)){
                 return af.getSeuilExonere();
             }
         }
         return 0;
     }
-
+    public int rechercheIdParAtotorite(String autorite) {
+        for(AutoriteFiscale af : this.db.autoritesFiscale){
+            if (af.getNom().equals(autorite)){
+                return af.getId();
+            }
+        }
+        return 0;
+    }
     @Override
     public void ajouterAutorite(AutoriteFiscale autoriteFiscale) {
 
     }
 
     @Override
-    public int modifierSeuilAutorite(String autorite, double seuil) {
-        return 0;
+    public void modifierSeuilAutorite(int id, double seuil) {
+
     }
 
     @Override
-    public int supprimerAutorite(String autorite) {
-        return 0;
+    public void supprimerAutorite(int id) {
+
     }
 }
 /*

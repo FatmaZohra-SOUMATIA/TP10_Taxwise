@@ -12,8 +12,8 @@ public interface IAutoriteFiscaleDAO {
     void ajouterAutorite(AutoriteFiscale autoriteFiscale);
 
     // Modifie le seuil exonéré d'une autorité fiscale spécifique.
-    int modifierSeuilAutorite(String autorite, double seuil);
+    void modifierSeuilAutorite(int id, double seuil);
 
     // Supprime une autorité fiscale spécifique.
-    int supprimerAutorite(String autorite);
+    void supprimerAutorite(int id);
 }

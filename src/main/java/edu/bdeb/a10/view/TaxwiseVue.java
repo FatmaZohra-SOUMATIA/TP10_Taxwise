@@ -19,19 +19,19 @@ public class TaxwiseVue {
         /******************1-Creation des DAO **************/
 
         /*1-DAO de TrancheRevenu pour aller chercher les tranches d une autorite fiscale*/
-        //ITranchesRevenuDAO daoTaux = new TranchesRevenuDAO_JPA();
+        ITranchesRevenuDAO daoTaux = new TranchesRevenuDAO_JPA();
         //ITranchesRevenuDAO daoTaux = new TranchesRevenuDAO_InMemory();
-        ITranchesRevenuDAO daoTaux = new TranchesRevenuDAO_JDBC();
+       //ITranchesRevenuDAO daoTaux = new TranchesRevenuDAO_JDBC();
 
         /*2-DAO de AutoriteFiscale pour aller chercher le seuil */
+        IAutoriteFiscaleDAO daoSeuil=new AutoriteFiscaleDAO_JPA();
         //IAutoriteFiscaleDAO daoSeuil=new AutoriteFiscaleDAO_InMemory();
-        // IAutoriteFiscaleDAO daoSeuil=new AutoriteFiscaleDAO_JPA();
-        IAutoriteFiscaleDAO daoSeuil = new AutoriteFiscaleDAO_JDBC();
+       // IAutoriteFiscaleDAO daoSeuil = new AutoriteFiscaleDAO_JDBC();
 
         /******2-Passer les DAO aux services pour calculer les taxes***********/
 
         //service RevenueCanada pour calculer la taxe du revenu deu Canada
-        RevenueCanadaService calculCa = new RevenueCanadaService(daoTaux, daoSeuil);
+        RevenueCanadaService calculCa = new RevenueCanadaService(daoTaux, daoSeuil); //injection des DAO
         double taxeCa = calculCa.calculTaxe(montant);
         System.out.println("La taxe du Canada " + taxeCa+" CAD");
 

@@ -13,17 +13,17 @@ public class QueryBox {
     // Requête SQL pour trouver les tranches de revenu d'une autorité fiscale spécifique
     public static String TROUVER_TRANCHE_REVENU_PAR_NOM_AUTORITE =
 
-            "SELECT tr.id, tr.tranche_min, tr.tranche_max, tr.taux_imposition " +
+            "SELECT *" +
                     "FROM TranchesRevenu tr " +
                     "JOIN AutoriteFiscale af ON tr.autorite_fiscale_id = af.id " +
                     "WHERE af.nom LIKE ? AND tr.tranche_min <= ?";
 
     // Requête SQL pour supprimer les tranches de revenu d'une autorité fiscale spécifique
-    public static String SUPPRIMER_TRANCHE_REVENU_PAR_NOM_AUTORITE =
+    public static String SUPPRIMER_TRANCHE_REVENU_PAR_ID =
 
             "DELETE FROM TranchesRevenu tr " +
                     "JOIN AutoriteFiscale af ON tr.autorite_fiscale_id = af.id " +
-                    "WHERE af.nom LIKE ?";
+                    "WHERE tr.id = ?";
 
     // Requête SQL pour modifier une tranche de revenu d'une autorité fiscale spécifique
     public static final String MODIFIER_TRANCHE_REVENU =

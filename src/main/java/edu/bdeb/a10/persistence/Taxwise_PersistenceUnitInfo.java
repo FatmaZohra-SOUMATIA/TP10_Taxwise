@@ -87,11 +87,11 @@ public class Taxwise_PersistenceUnitInfo implements PersistenceUnitInfo {
 
 
 
-        props.setProperty("hibernate.format_sql", "false");
-        props.setProperty("hibernate.dialect", "org.hibernate.dialect.mariadb.MariaDbDialect");
-        props.setProperty("hibernate.show_sql", "tr");
-        props.setProperty("hibernate.use_sql_comments", "false");
-        props.setProperty("hibernate.ejb.interceptors", "org.hibernate.ejb.interceptors.EmptyInterceptor");
+        props.setProperty("hibernate.format_sql","false");
+        props.setProperty("hibernate.use_sql_comments","false");
+        props.setProperty("hibernate.show_sql","false");
+        props.setProperty("hibernate.dialect","org.hibernate.dialect.MariaDBDialect");
+        props.setProperty("hibernate.ejb.interceptor","org.hibernate.ejb.interceptor.EmptyInterceptor");
         return props;
     }
 

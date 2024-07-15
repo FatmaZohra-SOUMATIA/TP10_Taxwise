@@ -4,6 +4,7 @@ import edu.bdeb.a10.model.TranchesRevenu;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Query;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
 import java.util.HashMap;
@@ -19,13 +20,17 @@ public class TranchesRevenuDAO_JPA implements ITranchesRevenuDAO {
                 .createContainerEntityManagerFactory(taxwise_pui, new HashMap());
         this.em = emf.createEntityManager();
     }
-//    public List<TranchesRevenu> trouverTranchesParAutorite(String autorite_id) {
-//        return this.em.find(TranchesRevenu.class, autorite_id);
-//    }
 
     @Override
     public List<TranchesRevenu> rechercheTaux(String autorite, double montant) {
-        return List.of();
+        this.em.getTransaction().begin();
+        Query qurey=this.em.createNamedQuery("TROUVER_TRANCHE_REVENU_PAR_NOM_AUTORITE", TranchesRevenu.class);
+        qurey.setParameter("nom", autorite);
+        qurey.setParameter("revenu", montant);
+        List<TranchesRevenu> tranchesRevenus=qurey.getResultList();
+        this.em.getTransaction().commit();
+        return tranchesRevenus;
+
     }
 
     @Override
@@ -44,13 +49,24 @@ public class TranchesRevenuDAO_JPA implements ITranchesRevenuDAO {
     }
 
     @Override
-    public int modifierTranchesRevenu(TranchesRevenu tranche) {
-        return 0;
+    public void modifierTranchesRevenu(TranchesRevenu tranchesRevenu) {
+
     }
 
     @Override
-    public int supprimerTranchesRevenuAutorite(String autorite) {
-        return 0;
+    public void supprimerTranchesRevenuAutorite(int id) {
+        EntityTransaction transaction = this.em.getTransaction();
+        try {
+            transaction.begin();
+            TranchesRevenu tranche = this.em.find(TranchesRevenu.class, id);
+            this.em.remove(tranche);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace(); // Handle or log the exception as needed
+        }
     }
     public void close(){
         this.em.close();

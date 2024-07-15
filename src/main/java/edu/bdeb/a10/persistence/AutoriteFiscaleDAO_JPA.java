@@ -4,6 +4,7 @@ import edu.bdeb.a10.model.AutoriteFiscale;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Query;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
 import java.util.HashMap;
@@ -21,13 +22,12 @@ public class AutoriteFiscaleDAO_JPA implements IAutoriteFiscaleDAO {
         this.em = emf.createEntityManager();
     }
 
-    public AutoriteFiscale trouverTranchesParAutorite(String autorite_id) {
-        return this.em.find(AutoriteFiscale.class, autorite_id);
-    }
 
     @Override
     public double rechercheSeuil(String autorite) {
-        return 0;
+        Query namedQuery =this.em.createNamedQuery("RECHERCHE_SEUIL_PAR_NOM", AutoriteFiscale.class);
+        namedQuery.setParameter("autorite", autorite);
+        return (double) namedQuery.getSingleResult();
     }
 
     @Override
@@ -46,13 +46,13 @@ public class AutoriteFiscaleDAO_JPA implements IAutoriteFiscaleDAO {
     }
 
     @Override
-    public int modifierSeuilAutorite(String autorite, double seuil) {
-        return 0;
+    public void modifierSeuilAutorite(int id, double seuil) {
+
     }
 
     @Override
-    public int supprimerAutorite(String autorite) {
-        return 0;
+    public void supprimerAutorite(int id) {
+
     }
 
     public void close(){

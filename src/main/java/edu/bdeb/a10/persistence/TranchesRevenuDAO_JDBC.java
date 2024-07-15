@@ -22,15 +22,15 @@ public class TranchesRevenuDAO_JDBC implements ITranchesRevenuDAO {
         List<TranchesRevenu> tranchesRevenu = new ArrayList<>();
         try {
             PreparedStatement pst = this.connexion.prepareStatement(QueryBox.TROUVER_TRANCHE_REVENU_PAR_NOM_AUTORITE);
-            pst.setString(1, "%"+autorite+"%");
+            pst.setString(1, "%" + autorite + "%");
             pst.setDouble(2, montant);
             ResultSet result = pst.executeQuery(); //le resultat est un enregistrement
             while (result.next()) {  //s il y a au moins un enregistrement dans l objet result
-                int id=result.getInt("id");
-                double trancheMin=result.getDouble("tranche_min");
-                double trancheMax=result.getDouble("tranche_max");
-                double tauxImposition=result.getDouble("taux_imposition");
-                tranchesRevenu.add(new TranchesRevenu( id, trancheMin, trancheMax,  tauxImposition));
+                int id = result.getInt("id");
+                double trancheMin = result.getDouble("tranche_min");
+                double trancheMax = result.getDouble("tranche_max");
+                double tauxImposition = result.getDouble("taux_imposition");
+                tranchesRevenu.add(new TranchesRevenu(id, trancheMin, trancheMax, tauxImposition));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -45,9 +45,9 @@ public class TranchesRevenuDAO_JDBC implements ITranchesRevenuDAO {
         PreparedStatement pst = null;
         try {
             pst = this.connexion.prepareStatement(QueryBox.AJOUTER_TRANCHE_REVENU);
-            pst.setDouble(1,tranche.getTrancheMin());
-            pst.setDouble(2,tranche.getTrancheMax());
-            pst.setDouble(3,tranche.getTauxImposition());
+            pst.setDouble(1, tranche.getTrancheMin());
+            pst.setDouble(2, tranche.getTrancheMax());
+            pst.setDouble(3, tranche.getTauxImposition());
             pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -56,17 +56,17 @@ public class TranchesRevenuDAO_JDBC implements ITranchesRevenuDAO {
     }
 
     @Override
-    public int modifierTranchesRevenu(TranchesRevenu tranche) {
-        return 0;
+    public void modifierTranchesRevenu(TranchesRevenu tranchesRevenu) {
+
     }
 
     @Override
-    public int supprimerTranchesRevenuAutorite(String autorite) {
+    public void supprimerTranchesRevenuAutorite(int id) {
         PreparedStatement pst = null;
         try {
-            pst = this.connexion.prepareStatement(QueryBox.SUPPRIMER_TRANCHE_REVENU_PAR_NOM_AUTORITE);
-            pst.setString(1, autorite);
-            return pst.executeUpdate();
+            pst = this.connexion.prepareStatement(QueryBox.SUPPRIMER_TRANCHE_REVENU_PAR_ID);
+            pst.setInt(1, id);
+            pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -7,6 +7,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "AutoriteFiscale")
+@NamedQuery(name="RECHERCHE_SEUIL_PAR_NOM",
+        query="select a.seuilExonere from AutoriteFiscale a where a.nom =: autorite")
+
 public class AutoriteFiscale {
 
     @Id

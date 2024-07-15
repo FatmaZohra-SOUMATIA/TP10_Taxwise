@@ -1,37 +1,53 @@
 package edu.bdeb.a10.persistence;
 
+import edu.bdeb.a10.dataStore.InMemoryRepository;
 import edu.bdeb.a10.model.TranchesRevenu;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class TranchesRevenuDAO_InMemory implements ITranchesRevenuDAO{
+public class TranchesRevenuDAO_InMemory implements ITranchesRevenuDAO {
 
-@Override
+    InMemoryRepository db;
+    public TranchesRevenuDAO_InMemory() {
+        this.db = InMemoryRepository.getInstance();
+    }
+    @Override
     // Recherche les tranches de revenu pour une autorité fiscale donnée et un montant donné.
-public List<TranchesRevenu> rechercheTaux(String autorite, double montant){
-    return List.of();
-}
+    public List<TranchesRevenu> rechercheTaux(String autorite, double montant) {
+        AutoriteFiscaleDAO_InMemory dao=new AutoriteFiscaleDAO_InMemory();
+        List<TranchesRevenu> listTranches = new ArrayList<TranchesRevenu>();
+        int id=dao.rechercheIdParAtotorite(autorite);
+        for ( TranchesRevenu tr : this.db.tranchesRevenu)
+        {
+            if(tr.getId()==id){
+                if(tr.getTrancheMin()<montant){
+                    listTranches.add(tr);
+                }
+            }
+        }
+
+        return listTranches;
+    }
 
     // Ajoute une nouvelle tranche de revenu dans la base de données.
     @Override
-    public void ajouterTranchesRevenu(TranchesRevenu tranche){
+    public void ajouterTranchesRevenu(TranchesRevenu tranche) {
 
     }
 
     //Modifie une tranche de revenu existante dans la base de données.
     @Override
-    public int modifierTranchesRevenu(TranchesRevenu tranche){
-        return 0;
+    public void modifierTranchesRevenu(TranchesRevenu tranche) {
+
     }
 
     // Supprime toutes les tranches de revenu pour une autorité fiscale donnée.
 
     @Override
-    public int supprimerTranchesRevenuAutorite(String autorite){
-        return 0;
+    public void supprimerTranchesRevenuAutorite(int id) {
+
     }
-
-
 
 
 }

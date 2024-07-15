@@ -16,9 +16,9 @@ public interface ITranchesRevenuDAO {
     void ajouterTranchesRevenu(TranchesRevenu tranche);
 
     //Modifie une tranche de revenu existante dans la base de données.
-    int modifierTranchesRevenu(TranchesRevenu tranche);
+    void modifierTranchesRevenu(TranchesRevenu tranchesRevenu);
 
     // Supprime toutes les tranches de revenu pour une autorité fiscale donnée.
-    int supprimerTranchesRevenuAutorite(String autorite);
+    void supprimerTranchesRevenuAutorite(int id);
 }
 

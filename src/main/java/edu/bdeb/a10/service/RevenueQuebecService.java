@@ -8,7 +8,7 @@ import edu.bdeb.a10.persistence.ITranchesRevenuDAO;
  * pour l'Agence du revenu du Québec.
  */
 public class RevenueQuebecService extends CalculatriceTaxe {
-    private String autorite = "Québec";
+    private String autorite = "Agence du revenu du Québec";
 
     /**
      * Constructeur de la classe RevenueQuebecService.

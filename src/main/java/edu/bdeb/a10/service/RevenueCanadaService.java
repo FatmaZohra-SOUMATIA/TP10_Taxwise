@@ -4,7 +4,7 @@ import edu.bdeb.a10.persistence.IAutoriteFiscaleDAO;
 import edu.bdeb.a10.persistence.ITranchesRevenuDAO;
 
 public class RevenueCanadaService extends CalculatriceTaxe {
-    private String autorite = "Canada";
+    private String autorite = "Agence du revenu du Canada";
 
     public RevenueCanadaService(ITranchesRevenuDAO daoTaux, IAutoriteFiscaleDAO daoSeuil) {
         super(daoTaux, daoSeuil);

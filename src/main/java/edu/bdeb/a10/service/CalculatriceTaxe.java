@@ -36,6 +36,7 @@ public class CalculatriceTaxe {
         // Récupère la liste des tranches de revenu pour l'autorité fiscale et le montant donné
         List<TranchesRevenu> listeTranches = daoTaux.rechercheTaux(autorite, montant);
 
+
         // Vérifie si le montant est supérieur ou égal au seuil
         if (montant >= seuil) {
             // Parcourt chaque tranche de revenu

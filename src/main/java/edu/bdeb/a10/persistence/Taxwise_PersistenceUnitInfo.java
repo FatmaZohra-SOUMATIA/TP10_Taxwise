@@ -80,7 +80,7 @@ public class Taxwise_PersistenceUnitInfo implements PersistenceUnitInfo {
     @Override
     public Properties getProperties() {
         Properties props = new Properties();
-        props.setProperty("javax.persistence.jdbc.url", "jdbc:mariadb://mysql-fatmaa10.alwaysdata.net:3306");
+        props.setProperty("javax.persistence.jdbc.url", "jdbc:mariadb://mysql-fatmaa10.alwaysdata.net:3306/fatmaa10_taxwise");
         props.setProperty("javax.persistence.jdbc.user", "fatmaa10_usertax");
         props.setProperty("javax.persistence.jdbc.password", "password_userTaxe");
         props.setProperty("javax.persistence.jdbc.driver", "org.mariadb.jdbc.Driver");

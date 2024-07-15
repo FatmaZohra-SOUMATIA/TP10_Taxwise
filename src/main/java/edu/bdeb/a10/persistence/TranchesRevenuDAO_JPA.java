@@ -25,7 +25,7 @@ public class TranchesRevenuDAO_JPA implements ITranchesRevenuDAO {
     public List<TranchesRevenu> rechercheTaux(String autorite, double montant) {
         this.em.getTransaction().begin();
         Query qurey=this.em.createNamedQuery("TROUVER_TRANCHE_REVENU_PAR_NOM_AUTORITE", TranchesRevenu.class);
-        qurey.setParameter("nom", autorite);
+        qurey.setParameter("nom", "%"+autorite);
         qurey.setParameter("revenu", montant);
         List<TranchesRevenu> tranchesRevenus=qurey.getResultList();
         this.em.getTransaction().commit();

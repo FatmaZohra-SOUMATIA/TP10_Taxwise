@@ -23,10 +23,16 @@ public class AutoriteFiscaleDAO_JPA implements IAutoriteFiscaleDAO {
     }
 
 
-    @Override
+   @Override
+//    public double rechercheSeuil(String autorite) {
+//        Query namedQuery =this.em.createNamedQuery("RECHERCHE_SEUIL_PAR_NOM", AutoriteFiscale.class);
+//        namedQuery.setParameter("autorite", autorite);
+//        return (double) namedQuery.getSingleResult();
+//    }
     public double rechercheSeuil(String autorite) {
-        Query namedQuery =this.em.createNamedQuery("RECHERCHE_SEUIL_PAR_NOM", AutoriteFiscale.class);
-        namedQuery.setParameter("autorite", autorite);
+        String nativeQuery = "select seuil_exonere from AutoriteFiscale  where nom LIKE ?";
+        Query namedQuery =this.em.createNativeQuery(nativeQuery);
+        namedQuery.setParameter(1, "%"+autorite);
         return (double) namedQuery.getSingleResult();
     }
 

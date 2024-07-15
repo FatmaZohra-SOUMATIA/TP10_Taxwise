@@ -54,4 +54,9 @@ public class AutoriteFiscaleDAO_JPA implements IAutoriteFiscaleDAO {
     public int supprimerAutorite(String autorite) {
         return 0;
     }
+
+    public void close(){
+        this.em.close();
+        this.emf.close();
+    }
 }

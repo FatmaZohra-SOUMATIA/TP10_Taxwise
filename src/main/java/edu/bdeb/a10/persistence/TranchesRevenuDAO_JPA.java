@@ -52,6 +52,10 @@ public class TranchesRevenuDAO_JPA implements ITranchesRevenuDAO {
     public int supprimerTranchesRevenuAutorite(String autorite) {
         return 0;
     }
+    public void close(){
+        this.em.close();
+        this.emf.close();
+    }
 }
 
 

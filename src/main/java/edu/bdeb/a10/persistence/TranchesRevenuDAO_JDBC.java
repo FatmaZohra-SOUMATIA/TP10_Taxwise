@@ -57,7 +57,17 @@ public class TranchesRevenuDAO_JDBC implements ITranchesRevenuDAO {
 
     @Override
     public void modifierTranchesRevenu(TranchesRevenu tranchesRevenu) {
-
+        PreparedStatement pst = null;
+        try {
+            pst = this.connexion.prepareStatement(QueryBox.MODIFIER_TRANCHE_REVENU);
+            pst.setDouble(1, tranchesRevenu.getTrancheMin());
+            pst.setDouble(2, tranchesRevenu.getTrancheMax());
+            pst.setDouble(3, tranchesRevenu.getTauxImposition());
+            pst.setInt(4, tranchesRevenu.getId());
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

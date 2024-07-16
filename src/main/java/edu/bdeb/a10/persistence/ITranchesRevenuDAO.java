@@ -5,7 +5,7 @@ import edu.bdeb.a10.model.TranchesRevenu;
 import java.util.List;
 
 /**
- * Interface pour les opérations DAO (Data Access Object) sur les tranches de revenu.
+ * Interface définit les opérations CRUD pour les différents DAO communicant avec la table TranchesRevenu.
  */
 public interface ITranchesRevenuDAO {
 

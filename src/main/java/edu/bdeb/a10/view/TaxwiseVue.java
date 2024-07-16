@@ -12,7 +12,7 @@ public class TaxwiseVue {
 
         //Lire le revenu à partir de la console
         Scanner scan = new Scanner(System.in);
-        System.out.println("Entrer votre revenu annuel : ");
+        System.out.println("Veuillez saisir votre revenu annuel : ");
         String revenu = scan.next();
         double montant = Double.parseDouble(revenu);
 
@@ -33,12 +33,12 @@ public class TaxwiseVue {
         //service RevenueCanada pour calculer la taxe du revenu deu Canada
         RevenueCanadaService calculCa = new RevenueCanadaService(daoTaux, daoSeuil); //injection des DAO
         double taxeCa = calculCa.calculTaxe(montant);
-        System.out.println("La taxe du Canada " + taxeCa+" CAD");
+        System.out.println("** La taxe du Canada :" + taxeCa+" CAD");
 
         //service RevenueQuebec pour calculer la taxe du revenu deu Quebec
         RevenueQuebecService calculQc = new RevenueQuebecService(daoTaux, daoSeuil);
         double taxeQC = calculQc.calculTaxe(montant);
-        System.out.println("La taxe du Quebec " + taxeQC+" CAD");
+        System.out.println("** La taxe du Quebec :" + taxeQC+" CAD");
     }
 }
 

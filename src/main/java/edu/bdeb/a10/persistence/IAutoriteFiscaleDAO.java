@@ -2,6 +2,9 @@ package edu.bdeb.a10.persistence;
 
 import edu.bdeb.a10.model.AutoriteFiscale;
 
+/**
+ * Interface définit les opérations CRUD pour les différents DAO communicant avec la table AutoriteFiscale.
+ */
 public interface IAutoriteFiscaleDAO {
 
 

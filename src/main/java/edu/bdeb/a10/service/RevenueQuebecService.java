@@ -28,7 +28,7 @@ public class RevenueQuebecService extends CalculatriceTaxe {
      * @return Le montant de la taxe calculée.
      */
     public double calculTaxe(double montant) {
-        // Appel de la méthode calculTaxe de la classe parente, en passant le montant et le nom de l'autorité fiscale
+        // Appel de la méthode calculTaxe de la classe mere, en  lui passant le montant et le nom de l'autorité fiscale
         return super.calculTaxe(montant, this.autorite);
     }
 }

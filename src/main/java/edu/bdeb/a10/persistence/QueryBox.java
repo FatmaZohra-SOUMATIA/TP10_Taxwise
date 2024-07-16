@@ -2,7 +2,7 @@ package edu.bdeb.a10.persistence;
 
 public class QueryBox {
 
-    /*****************CRUD sur la Table TranchesRevenu*************/
+    /*****************Requetes SQL pour les opérations CRUD sur la Table TranchesRevenu*************/
 
     // Requête SQL pour ajouter une nouvelle tranche de revenu dans la table TranchesRevenu
     public static final String AJOUTER_TRANCHE_REVENU =
@@ -32,7 +32,7 @@ public class QueryBox {
                     "WHERE id = ?";
 
 
-    /*****************CRUD sur la Table AutoritéFiscale******************/
+    /*****************Requetes SQL pour les opérations CRUD sur la Table AutoritéFiscale******************/
     // Requête SQL pour ajouter une nouvelle autorité fiscale dans la table AutoritéFiscale
     public static final String AJOUTER_AUTORITE_FISCALE =
             "INSERT INTO AutoriteFiscale (nom, seuil_exonere) " +
@@ -49,5 +49,5 @@ public class QueryBox {
 
     // Requête SQL pour modifier le seuil d'une autorité fiscale spécifique
     public static final String MODIFIER_SEUIL_AUTORITE_FISCALE =
-            "UPDATE AutoriteFiscale SET seuil_exonere = ? WHERE nom LIKE ?";
+            "UPDATE AutoriteFiscale SET seuil_exonere = ? WHERE id = ?";
 }

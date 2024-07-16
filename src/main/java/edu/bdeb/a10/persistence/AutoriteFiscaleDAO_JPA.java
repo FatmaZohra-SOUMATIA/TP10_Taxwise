@@ -1,6 +1,7 @@
 package edu.bdeb.a10.persistence;
 
 import edu.bdeb.a10.model.AutoriteFiscale;
+import edu.bdeb.a10.model.TranchesRevenu;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -23,7 +24,7 @@ public class AutoriteFiscaleDAO_JPA implements IAutoriteFiscaleDAO {
     }
 
 
-   @Override
+    @Override
 //    public double rechercheSeuil(String autorite) {
 //        Query namedQuery =this.em.createNamedQuery("RECHERCHE_SEUIL_PAR_NOM", AutoriteFiscale.class);
 //        namedQuery.setParameter("autorite", autorite);
@@ -31,8 +32,8 @@ public class AutoriteFiscaleDAO_JPA implements IAutoriteFiscaleDAO {
 //    }
     public double rechercheSeuil(String autorite) {
         String nativeQuery = "select seuil_exonere from AutoriteFiscale  where nom LIKE ?";
-        Query namedQuery =this.em.createNativeQuery(nativeQuery);
-        namedQuery.setParameter(1, "%"+autorite);
+        Query namedQuery = this.em.createNativeQuery(nativeQuery);
+        namedQuery.setParameter(1, "%" + autorite);
         return (double) namedQuery.getSingleResult();
     }
 
@@ -47,21 +48,47 @@ public class AutoriteFiscaleDAO_JPA implements IAutoriteFiscaleDAO {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-            e.printStackTrace(); // Handle or log the exception as needed
+            e.printStackTrace();
         }
     }
 
     @Override
     public void modifierSeuilAutorite(int id, double seuil) {
+        EntityTransaction transaction = this.em.getTransaction();
+        try {
+            transaction.begin();
+            AutoriteFiscale autorite = this.em.find(AutoriteFiscale.class, id);
+            autorite.setSeuilExonere(seuil);
+            // Met à jour l'entité TranchesRevenu
+            this.em.merge(autorite);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
 
     }
 
     @Override
     public void supprimerAutorite(int id) {
 
+        EntityTransaction transaction = this.em.getTransaction();
+        try {
+            transaction.begin();
+            AutoriteFiscale autoriteFiscale = this.em.find(AutoriteFiscale.class, id);
+            this.em.remove(autoriteFiscale);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 
-    public void close(){
+    public void close() {
         this.em.close();
         this.emf.close();
     }

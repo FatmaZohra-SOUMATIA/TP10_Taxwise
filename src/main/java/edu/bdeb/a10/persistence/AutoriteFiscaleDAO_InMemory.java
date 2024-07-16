@@ -5,6 +5,7 @@ import edu.bdeb.a10.model.AutoriteFiscale;
 
 public class AutoriteFiscaleDAO_InMemory implements IAutoriteFiscaleDAO {
     InMemoryRepository db;
+    // Constructeur qui initialise la base de données en mémoire
     public AutoriteFiscaleDAO_InMemory() {
         this.db = InMemoryRepository.getInstance();
     }
@@ -18,7 +19,7 @@ public class AutoriteFiscaleDAO_InMemory implements IAutoriteFiscaleDAO {
         }
         return 0;
     }
-    public int rechercheIdParAtotorite(String autorite) {
+    public int rechercheIdParAutorite(String autorite) {
         for(AutoriteFiscale af : this.db.autoritesFiscale){
             if (af.getNom().equals(autorite)){
                 return af.getId();
@@ -28,31 +29,27 @@ public class AutoriteFiscaleDAO_InMemory implements IAutoriteFiscaleDAO {
     }
     @Override
     public void ajouterAutorite(AutoriteFiscale autoriteFiscale) {
+        db.autoritesFiscale.add(autoriteFiscale);
 
     }
 
     @Override
     public void modifierSeuilAutorite(int id, double seuil) {
+        for (AutoriteFiscale af : this.db.autoritesFiscale){
+            if (af.getId() == id){
+                af.setSeuilExonere(seuil);
+            }
+        }
 
     }
 
     @Override
     public void supprimerAutorite(int id) {
+        for (AutoriteFiscale af : this.db.autoritesFiscale){
+            if (af.getId() == id){
+                db.autoritesFiscale.remove(af);
+            }
+        }
 
     }
 }
-/*
-
-
-
-
-    // connect to database to load the rate
-    public double find(Currency from, Currency to) {
-        System.out.println("\nRetrieving data from memory...");
-        for(ConversionRate rate : this.db.rates)
-            if(rate.getFrom().getName().equalsIgnoreCase(from.getName()) &&
-                    rate.getTo().getName().equalsIgnoreCase(to.getName()))
-                return rate.getRate();
-        return 0.0;
-    }
- */

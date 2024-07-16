@@ -4,29 +4,30 @@ import edu.bdeb.a10.model.AutoriteFiscale;
 import edu.bdeb.a10.model.TranchesRevenu;
 
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.List;
 
-// this class helps in emulating the database
+// Cette classe aide à émuler la base de données (Singleton)
 public class InMemoryRepository {
-    //Step 2
+    // Étape 2 : Déclaration de l'instance unique de la classe
     public static InMemoryRepository datastore = null;
 
+    // Listes pour stocker les autorités fiscales et les tranches de revenu
     public List<AutoriteFiscale> autoritesFiscale;
     public List<TranchesRevenu> tranchesRevenu;
 
-    // Step 1 : make constructor private
+    // Étape 1 : Rendre le constructeur privé pour empêcher l'instanciation externe
     private InMemoryRepository() {
         autoritesFiscale = new ArrayList<AutoriteFiscale>();
         tranchesRevenu = new ArrayList<TranchesRevenu>();
 
+        // Ajout des autorités fiscales avec des valeurs initiales
         AutoriteFiscale autoriteFiscaleCA = new AutoriteFiscale(1, "Canada", 15000);
         this.autoritesFiscale.add(autoriteFiscaleCA);
 
         AutoriteFiscale autoriteFiscaleQC = new AutoriteFiscale(2, "Québec", 17000);
         this.autoritesFiscale.add(autoriteFiscaleQC);
 
-
+        // Ajout des tranches de revenu pour chaque autorité fiscale
         this.tranchesRevenu.add(new TranchesRevenu(1, 0, 55867, 15));
         this.tranchesRevenu.add(new TranchesRevenu(1, 55867, 111733, 20.5));
         this.tranchesRevenu.add(new TranchesRevenu(1, 111733, 173205, 26));
@@ -40,10 +41,12 @@ public class InMemoryRepository {
 
     }
 
-    //Step 3: getInstance to retrieve the unique instance
+    // Étape 3 : getInstance pour récupérer l'instance unique
     public static InMemoryRepository getInstance() {
+        // Si l'instance n'a pas encore été créée, créer une nouvelle instance
         if (InMemoryRepository.datastore == null)
             InMemoryRepository.datastore = new InMemoryRepository();
+        // Retourner l'instance unique
         return InMemoryRepository.datastore;
     }
 }
